@@ -118,8 +118,8 @@
             </div>
           </div>
           <footer class="card-footer">
-            <a class="card-footer-item">Search</a>
-            <a class="card-footer-item">Clear</a>
+            <a class="card-footer-item button is-large is-outlined is-danger">Search</a>
+            <a class="card-footer-item button is-large is-outlined is-danger">Clear</a>
           </footer>
         </div>
       </div>
@@ -184,8 +184,8 @@
                 </div>
               </div>
               <footer class="card-footer">
-                <a class="card-footer-item">Details</a>
-                <a class="card-footer-item">Contact</a>
+                <a class="card-footer-item button is-large is-outlined is-danger">Details</a>
+                <a class="card-footer-item button is-large is-outlined is-danger">Contact</a>
               </footer>
             </div>
           </div>
