@@ -20,6 +20,14 @@
       <div class="level-right">
         <div class="field has-addons">
           <p class="control">
+            <span class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>With options</option>
+              </select>
+            </span>
+          </p>
+          <p class="control">
             <input class="input is-danger" type="text" placeholder="Find a property">
           </p>
           <p class="control">
@@ -32,7 +40,6 @@
     </nav>
     <br>
     <br>
-    <p>{{houses}}</p>
     <table v-if="list" class=" table is-striped">
       <thead>
         <tr>
@@ -46,13 +53,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr v-for="house in houses">
+          <td>{{house.title}}</td>
+          <td>{{house.description}}</td>
+          <td>{{house.locName}}</td>
+          <td>{{house.area}}</td>
+          <td>{{house.features.join(`,\n`)}}</td>
+          <td>{{house.price}}</td>
           <td>
             <a class="button is-outlined is-primary">
               <span>Details</span>
@@ -64,28 +71,34 @@
         </tr>
       </tbody>
     </table>
-    <div v-else class="columns is-multiline">
-      <div class="column is-one-quarter">
-        <div class="card">
+    <div v-else class="columns is-multiline is-tablet">
+      <div v-for="house in houses" class="column is-one-quarter">
+        <div class="card bm--card-equal-height">
           <header class="card-header">
             <p class="card-header-title">
-              Title
+              {{house.title}}
             </p>
           </header>
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Image">
+              <img :src="house.image" alt="Image">
             </figure>
           </div>
           <div class="card-content">
             <div class="content">
-              <p class="title">Location</p>
-              <p>Description</p>
-              <p>Area: </p>
-              <p>Features:</p>
-              <p class="subtitle">Price</p>
-              <br>
-              <small>11:09 PM - 1 Jan 2016</small>
+              <table class="table is-striped has-text-centered">
+                <tbody>
+                  <tr>{{house.description}}</tr>
+                  <br>
+                  <tr>area: {{house.area}} m2</tr>
+                  <tr>features: {{house.features.join(`,\n`)}}</tr>
+                  <br>
+                  <tr>Rp {{house.price}}</tr>
+                  <br>
+                  <tr><small>{{house.createdAt}}</small></tr>
+              </tbody>
+              </table>
+
             </div>
           </div>
           <footer class="card-footer">
@@ -109,7 +122,7 @@ export default {
   },
   computed: {
     houses () {
-      return this.$store.getters.houses
+      return this.$store.getters.getHouses
     }
   },
   methods: {
@@ -122,3 +135,14 @@ export default {
   }
 }
 </script>
+
+<style>
+  .bm--card-equal-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%
+  }
+  .bm--card-equal-height .card-footer {
+    margin-top: auto;
+  }
+</style>
