@@ -11,6 +11,10 @@ var houseSchema = new Schema ({
     required: [true, '{PATH} is required'],
     enum: {values: ['land', 'apartment', 'villa'], message: '{PATH} should not be outside of the allowed values'}
   },
+  image: {
+    type: String,
+    required: [true, '{PATH} is required']
+  },
   title: {
     type: String,
     required: [true, '{PATH} is required']

@@ -3,6 +3,7 @@ const House = require('../models/house')
 var create = ((req, res) => {
   let newHouse = new House ({
     createdAt: new Date(),
+    image: req.body.image,
     title: req.body.title,
     description: req.body.description,
     price: req.body.price,
@@ -12,9 +13,9 @@ var create = ((req, res) => {
     locName: req.body.locName,
     locLat: req.body.locLat,
     locLng: req.body.locLng,
-    bedrooms: req.body.rooms,
-    livingrooms: req.body.rooms,
-    bathrooms: req.body.rooms,
+    bedrooms: req.body.bedrooms,
+    livingrooms: req.body.livingrooms,
+    bathrooms: req.body.bathrooms,
     features: req.body.features,
     contactName: req.body.contactName,
     contactPhone: req.body.contactPhone,
@@ -26,7 +27,7 @@ var create = ((req, res) => {
 })
 
 var showAll = ((req, res) => {
-  House.find((err, houses) => {
+  House.find({}, null, {sort: {'createdAt': -1}}, (err, houses) => {
     res.send(err ? err : houses)
   })
 })
@@ -46,17 +47,18 @@ var update = ((req, res) => {
       house.price = req.body.price || house.price
       house.area = req.body.area || house.area
       house.width = req.body.width || house.width
-      house.length = req.body.length || house.length
+      house.length = req.body.length || house.lengthgithu
       house.locName = req.body.locName || house.locName
       house.locLat = req.body.locLat || house.locLat
       house.locLng = req.body.locLng || house.locLng
-      house.bedrooms = req.body.rooms || house.bedrooms
-      house.livingrooms = req.body.rooms || house.livingrooms
-      house.bathrooms = req.body.rooms || house.bathrooms
-      console.log(req.body.features)
+      house.bedrooms = req.body.bedrooms || house.bedrooms
+      house.livingrooms = req.body.livingrooms || house.livingrooms
+      house.bathrooms = req.body.bathrooms || house.bathrooms
       house.features = req.body.features || house.features
       house.contactName = req.body.contactName || house.contactName
       house.contactPhone = req.body.contactPhone || house.contactPhone
+      house.type = req.body.type || house.type
+      house.image = req.body.image || house.image
       house.save((errSaving, house) => {
         res.send(err ? err : house)
       })
